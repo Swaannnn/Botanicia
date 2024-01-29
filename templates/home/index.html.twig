@@ -1,0 +1,155 @@
+{% include 'header/header.html.twig' %}
+
+{% block body %}
+
+    <title> Botanicia </title>
+    <link rel="stylesheet" href="{{ asset('asset/home/style.css') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('Image/plant.png') }}" />
+
+    <div class="imageaccboit">
+        <img src="{{ asset('Image/im2.png') }}" class="imageacc">
+        <div class="texteacceuil">
+            <p class="titreacceuil">Bonjour!</p>
+            <p class="soustitreacceuil">Bienvenue sur <span>Botanicia</span></p>
+            <p>Nous vous proposons de nombreux produits exceptionnels en terme de jardinage</p>
+        </div>
+    </div>
+    <section class="screen">
+
+        <div class="listproducts">
+            <p class="titlelist">Nos produits phares</p>
+            <div class="products">
+                {% for product in products %}
+                    <a class="product" href="{{ path('app_product', {'id': product.getId}) }}">
+                        <div class="image">
+                            <img src="{{ product.getPhoto }}" alt="Image du produit">
+                        </div>
+                        <div class="description">
+                            <p>{{ product.getBrand }}</p>
+                            <p>{{ product.getName }}</p>
+                            {% set prix = product.getPrice|split('.') %}
+                            <div class="price">
+                                {% if product.getQuantity == 0 %}
+                                    <p>En rupture</p>
+                                {% else %}
+                                    <p>{{ prix[0] }}€</p>
+                                    {% if prix|length != 1 %}
+                                        <p>{{ prix[1] }}</p>
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <div class="marketing">
+        <div class="case">
+            <img src="{{ asset('Image/livraison-rapide.png') }}">
+            <p>
+                <b>Livraison rapide !</b>
+            </p>
+            <p>
+                Vous pouvez vous faire livrer à tout moment partout en France.
+            </p>
+        </div>
+        <div class="case">
+            <img src="{{ asset('Image/taux.png') }}">
+            <p>
+                <b>Satisfait ou satisfait !</b>
+            </p>
+            <p>
+                Plus de 132% des clients interrogés sont satisfaits de Botanicia.
+            </p>
+        </div>
+        <div class="case">
+            <img src="{{ asset('Image/pelle.png') }}">
+            <p>
+                <b>Recommandé par les professionnels !</b>
+            </p>
+            <p>
+                Plus de 3 milliards de professionnels nous recommandent dans le monde.
+            </p>
+        </div>
+        <div class="case">
+            <img src="{{ asset('Image/ecologie.png') }}">
+            <p>
+                <b>Notre engagement écologique</b>
+            </p>
+            <p>
+                Nous nous engageons à vous proposer des produits respectueux de l'environnement.
+            </p>
+        </div>
+        <div class="case">
+            <img src="{{ asset('Image/mode-de-paiement.png') }}">
+            <p>
+                <b>Moyens de paiement</b>
+            </p>
+            <p>
+                Il est possible de payer en plusieurs fois, nous acceptons aussi les bitcoins.
+            </p>
+        </div>
+    </div>
+
+    <section class="screen">
+        <div class="listproducts">
+            <p class="titlelist">Nos Plantes</p>
+            <div class="products">
+                {% for plant in plants %}
+                    <a class="product" href="{{ path('app_product', {'id': plant.getId}) }}">
+                        <div class="image">
+                            <img src="{{ plant.getPhoto }}" alt="Image du produit">
+                        </div>
+                        <div class="description">
+                            <p>{{ plant.getBrand }}</p>
+                            <p>{{ plant.getName }}</p>
+                            {% set prix = plant.getPrice|split('.') %}
+                            <div class="price">
+                                {% if plant.getQuantity == 0 %}
+                                    <p>En rupture</p>
+                                {% else %}
+                                    <p>{{ prix[0] }}€</p>
+                                    {% if prix|length != 1 %}
+                                        <p>{{ prix[1] }}</p>
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="listproducts">
+            <p class="titlelist">Nos Arbres</p>
+            <div class="products">
+                {% for tree in trees %}
+                    <a class="product" href="{{ path('app_product', {'id': tree.getId}) }}">
+                        <div class="image">
+                            <img src="{{ tree.getPhoto }}" alt="Image du produit">
+                        </div>
+                        <div class="description">
+                            <p>{{ tree.getBrand }}</p>
+                            <p>{{ tree.getName }}</p>
+                            {% set prix = tree.getPrice|split('.') %}
+                            <div class="price">
+                                {% if tree.getQuantity == 0 %}
+                                    <p>En rupture</p>
+                                {% else %}
+                                    <p>{{ prix[0] }}€</p>
+                                    {% if prix|length != 1 %}
+                                        <p>{{ prix[1] }}</p>
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <script src="{{ asset("asset/home/loader.js") }}"></script>
+    {% include 'footer/footer.html.twig' %}
+{% endblock %}
+

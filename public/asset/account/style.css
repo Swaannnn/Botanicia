@@ -1,0 +1,210 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    font-family: 'nunito', sans-serif;
+    overflow-x: hidden;
+}
+
+/* header {
+    position: fixed;
+    top: 0;
+    height: 80px;
+    width: 100%;
+    background-color: black;
+} */
+
+/* header {
+    position: fixed;
+    width: 100%;
+    z-index: 1;
+    background-color: purple;
+} */
+
+a:hover {
+    cursor: pointer;
+}
+
+section {
+    /* background-image: url(./src/images/wallpaper.jpeg); */
+    /* background-attachment: fixed; */
+    /* background-repeat: no-repeat; */
+    /* background-size: cover; */
+    /* height: 100vh; */
+    background-color: #f2f2f2;
+
+    display: flex;
+    justify-content: center;
+
+    min-height: calc(100vh - 110px);
+}
+
+.container {
+    width: 1500px;
+    margin-top: 50px;
+
+    /*display: grid;*/
+    /*grid-template-columns: 1fr 3fr;*/
+    /*gap: 50px;*/
+}
+
+.elements {
+    background-color: white;
+    border-radius: 8px;
+    /* box-shadow: 6px 6px 10px 4px rgba(0,0,0,0.39); */
+    padding: 25px;
+}
+
+.titres {
+    background-color: #0b9446; /* Couleur de fond */
+    padding: 15px; /* Espacement intérieur */
+    border-radius: 8px; /* Coins arrondis */
+    /*box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); !* Ombre légère *!*/
+}
+
+.titre {
+    display: block;
+    color: white; /* Couleur du texte */
+    padding: 10px; /* Espacement intérieur */
+    margin: 10px 0; /* Marge autour des liens */
+    border-radius: 5px; /* Coins arrondis */
+    transition: background-color 0.3s ease; /* Transition de couleur en hover */
+}
+
+.titre:hover {
+    background-color: #075c32; /* Couleur de fond au survol */
+}
+
+
+
+
+.infosPersos {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+
+    display: flex;
+    align-items: center;
+    /*margin: 20px 0;*/
+}
+
+.infosPersos h3 {
+    /*color: ;*/
+    font-weight: bold;
+}
+
+.profil_infos,
+.profil_domicile {
+    /*margin: 20px 20px 10px 20px;*/
+}
+
+.profil_infos p,
+.profil_domicile p{
+    margin: 5px 0;
+}
+.profil_infos label{
+    display: flex;
+    justify-content: left;
+}
+
+.modif_profil{
+    margin: 0 0 5px 20px;
+    transform: translateX(20px);
+}
+
+.confirmation{
+    margin: 10px 0 0 0
+}
+
+.profil_infos input,
+.profil_infos label{
+    margin-top: 5px;
+    width: 195px;
+}
+
+.contact, .infosPersos, .commandes{
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    /*box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);*/
+}
+
+h2 {
+    color: #0b9446;
+}
+
+.contact p {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+
+.admin-info {
+    /*background-color: #0b9446;*/
+    color: black;
+    /*padding: 10px;*/
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+h1 {
+    font-size: 35px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.infosPersos button{
+    color: white;
+    background-color: #0b9446;
+    border: solid 1px black;
+    border-radius: 5px;
+    width: 200px;
+    height: 30px;
+    font-size: 16px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+td a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+td a:hover {
+    text-decoration: underline;
+}
+
+.no-orders {
+    text-align: left;
+    color: #888;
+}
+
+
+.infos_persos {
+    margin-top: 15px;
+    display: flex;
+    gap: 30px;
+}
+
+input {
+    border: 1px solid black;
+    padding: 2px 5px;
+    border-radius: 5px;
+}

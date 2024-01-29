@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Page</title>
+    <link rel="stylesheet" href="{{ asset("asset/admin/style.css") }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('Image/plant.png') }}" />
+
+</head>
+<body>
+<header>
+    <div class="gestion">
+        <a href="{{ path('app_admin_chart') }}">Graphique de ventes</a>
+        <a href="{{ path('app_admin_users') }}">Gérer les utilisateur</a>
+        <a href="{{ path('app_admin_products') }}">Gérer les produits</a>
+        <a href="{{ path('app_admin_add_user') }}">Ajouter un utilisateur</a>
+        <a href="{{ path('app_admin_add_product') }}">Ajouter un produit</a>
+
+
+    </div>
+    <div class="reste">
+        <a href="{{ path('app_home') }}">Retourner au site</a>
+        <a href="{{ path('app_logout') }}">Se déconnecter</a>
+    </div>
+</header>
+
+{% block body %}
+    {% if app.request.attributes.get('_route') == 'app_admin_users' %}
+
+
+        <h1>Liste des utilisateurs</h1>
+
+        <form method="get" action="{{ path('app_admin_users') }}">
+            <input type="text" name="search" placeholder="Rechercher utilisateur." />
+            <button type="submit">Rechercher</button>
+        </form>
+
+        <table class="table">
+            <thead>
+            <th>ID</th>
+            <th>LastName</th>
+            <th>FirstName</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Rôles</th>
+            <th>Actions</th>
+            <th></th>
+            </thead>
+            <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.lastname }}</td>
+                    <td>{{ user.firstname }}</td>
+
+                    <td>{{ user.email }}</td>
+                    <td>
+                        {% if user.phoneNumber == NULL %}
+                            Numéro non renseigné
+                        {% else %}
+                            {{ user.phoneNumber}}
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% for role in user.roles %}
+                            {% if role == "ROLE_USER" %}
+                                Utilisateur
+                            {% elseif role == "ROLE_ADMIN" %}
+                                Administrateur
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                    {% if user.roles[0] == "ROLE_USER" %}
+                        <td> <a href="{{ path('app_admin_edit_user', {'id': user.id}) }}">Modifier</a></td>
+                        <td> <a href="{{ path('app_admin_delete_user', {'id': user.id}) }}">Supprimer</a></td>
+                    {% else %}
+                        <td></td>
+                        <td></td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        {% elseif app.request.attributes.get('_route') == 'app_admin_products' %}
+
+
+        <h1>Liste des Produits</h1>
+
+        <form method="get" action="{{ path('app_admin_products') }}">
+            <input type="text" name="search" placeholder="Rechercher produit" />
+            <button type="submit">Rechercher</button>
+        </form>
+
+        <table>
+            <thead>
+            <th>ID</th>
+            <th>Catégorie</th>
+            <th>Nom</th>
+            <th>Marque</th>
+            <th>Description</th>
+            <th>Quantité</th>
+            <th>Prix</th>
+            <th colspan="2">Action</th>
+
+            </thead>
+            <tbody>
+            {% for product in produits %}
+                <tr>
+                    <td>{{ product.id }}</td>
+                    <td>{{ product.category.name }}</td>
+                    <td>{{ product.name}}</td>
+                    <td>{{ product.brand }}</td>
+                    <td>{{ product.description }}</td>
+                    <td>{{ product.quantity}}</td>
+                    <td>{{ product.price}}</td>
+                    <td> <a href="{{ path('app_admin_edit_product', {'id': product.id}) }}">Modifier</a></td>
+                    <td> <a href="{{ path('app_admin_delete_product', {'id': product.id}) }}">Supprimer</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {% elseif app.request.attributes.get('_route') == 'app_admin_chart' %}
+        <canvas id="myChart" width="400" height="200"></canvas>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                var data = {{ data | raw }};
+                var labels = {{ labels | raw }};
+                var ctx = document.getElementById('myChart').getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: data,
+                        datasets: [{
+                            label: 'Nombre de ventes',
+                            data: labels,
+                            backgroundColor: 'rgba(46,148,40,0.85)',
+                            borderColor: 'rgb(33,61,61)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            x: {
+                                beginAtZero: true
+                            },
+                            y: {
+                                beginAtZero: true,
+
+
+                            }
+
+                        },
+
+
+                    }
+
+                });
+            });
+        </script>
+    {% endif %}
+
+{% endblock %}
+
+
+
+

@@ -1,0 +1,25 @@
+{% include '../header/header.html.twig' %}
+
+<head>
+    <title>404</title>
+    <link rel="stylesheet" href="{{ asset('asset/error/404.css') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('Image/plant.png') }}" />
+</head>
+
+<section>
+    <div class="images">
+        <div class="bubble">
+            <div class="text">
+                <p>Erreur 404</p><br>
+                <p>Page introuvable</p>
+            </div>
+            <img src="{{ asset('Image/bubble.webp') }}" id="bubble" alt="bubble">
+            <a href="{{ path('app_home') }}" class="accueil">Retourner à l'accueil</a>
+        </div>
+        <div class="cactus">
+            <img src="{{ asset('Image/cactus.png') }}" id="cactus" alt="cactus">
+        </div>
+    </div>
+</section>
+
+{% include 'footer.html.twig' %}

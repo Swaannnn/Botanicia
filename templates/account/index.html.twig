@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+{% include 'header/header.html.twig' %}
+<title> Account </title>
+<link rel="icon" type="image/png" sizes="16x16" href="{{ asset('Image/plant.png') }}" />
+
+{% block body %}
+    <link rel="stylesheet" href="{{ asset('asset/account/style.css') }}">
+
+    <div class="example-wrapper">
+        <section>
+            <div class="container">
+                <div>
+                    <h1>Heureux de vous revoir {{ app.user.firstname }} !</h1>
+
+                    <div class="infosPersos elements">
+                        <div class="profil_infos">
+                            <form class="modif-profil profil_infos" action="{{ path("app_account_modifie") }}" method="POST" }>
+
+                                <h2>Mes informations personnelles</h2>
+
+                                <div class="infos_persos">
+                                    <div class="info_profil">
+                                        <h3>Profil</h3>
+
+                                        <p>Nom: {{ app.user.lastname }}</p>
+                                        <p>Prénom: {{ app.user.firstname }}</p>
+                                        <p>Adresse email : {{ app.user.email }}</p>
+                                        {% if app.user.phoneNumber == null %}
+                                            <p>Numéro de téléphone : non renseigné </p>
+                                        {% else %}
+                                            <p>Numéro de téléphone : <span>{{ app.user.phoneNumber }}</span></p>
+                                        {% endif %}
+                                        <input type="text" class="pourModif" name="phoneNumber" value="{{ app.user.phoneNumber is defined ? app.user.phoneNumber : '' }}" minlength="10" maxlength="10">
+                                    </div>
+                                    <div class="info_adresse">
+                                        <h3>Adresse</h3>
+                                        {% if app.user.address == null %}
+                                            <p>Adresse non renseignée</p>
+                                            <label>Adresse :</label>
+                                            <input type="text" class="pourModif" name="street" value="{{ app.user.address.street is defined ? app.user.address.street : '' }}">
+                                            <label>Code postal :</label>
+                                            <input type="text" class="pourModif" name="postal_code" value="{{ app.user.address.postalCode is defined ? app.user.address.postalCode : '' }}" minlength="5" maxlength="5">
+                                            <label>Ville :</label>
+                                            <input type="text" class="pourModif" name="city" value="{{ app.user.address.city is defined ? app.user.address.city : '' }}">
+                                            <label>Pays :</label>
+                                            <input type="text" class="pourModif" name="country" value="{{ app.user.address.country is defined ? app.user.address.country : '' }}"> <br>
+
+                                        {% else %}
+                                            <p> Adresse : <span> {{ app.user.address.street}} </span></p>
+                                            <input type="text" class="pourModif" name="street" value="{{ app.user.address.street is defined ? app.user.address.street : '' }}">
+                                            <p> Code Postal : <span> {{ app.user.address.postalCode}} </span></p>
+                                            <input type="text" class="pourModif" name="postal_code" value="{{ app.user.address.postalCode is defined ? app.user.address.postalCode : '' }}" minlength="5" maxlength="5">
+                                            <p> Ville : <span> {{ app.user.address.city}} </span></p>
+                                            <input type="text" class="pourModif" name="city" value="{{ app.user.address.city is defined ? app.user.address.city : '' }}">
+                                            <p> Pays : <span> {{ app.user.address.country}} </span></p>
+                                            <input type="text" class="pourModif" name="country" value="{{ app.user.address.country is defined ? app.user.address.country : '' }}"> <br>
+                                        {% endif %}
+
+                                    </div>
+                                </div>
+
+                                <button class="modif_profil" >Modifier votre profil</button>
+                                <button class="confirmation pourModif" type="submit">Confirmer les changements</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="commandes">
+                        <h2>Mes commandes</h2>
+
+                        {% if app.user.orders|length > 0 %}
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Commande</th>
+                                    <th>Montant</th>
+                                    <th>Facture</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for order in app.user.orders|reverse|slice(0, 20) %}
+                                    <tr>
+                                        <td>{{ order.date|date('Y-m-d') }}</td>
+                                        <td>{{ order.id }}</td>
+                                        <td>{{ order.totalPrice }} €</td>
+                                        <td><a href="{{ path('app_facture', {'orderId': order.id}) }}" target="_blank">Télécharger</a></td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        {% else %}
+                            <p class="no-orders">Aucune commande passée.</p>
+                        {% endif %}
+                    </div>
+
+                    <div class="contact elements">
+                        <h2>Nous contacter ?</h2>
+                        <p>Vous avez rencontré un soucis ? Vous avez une idée en tête concernant un produit à ajouter ? Alors contactez nous à l'adresse mail suivante :</p>
+                        <div class="admin-info">admin@botanicia.com</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script src="{{ asset('asset/account/account.js') }}"> </script>
+    {% include 'footer/footer.html.twig' %}
+{% endblock %}
+

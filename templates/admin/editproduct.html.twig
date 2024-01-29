@@ -1,0 +1,10 @@
+<link rel="stylesheet" href="{{ asset("asset/admin/edit_product_user.css") }}">
+{% block body %}
+    {% if add %}
+        <h1>Ajouter un produit</h1>
+    {% else %}
+        <h1>Modifier un produit</h1>
+    {% endif %}
+    {{ form(productForm) }}
+
+{% endblock %}

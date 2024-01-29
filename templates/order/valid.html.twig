@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Commande Validée</title>
+    <link rel="stylesheet" href="{{ asset('asset/order/valid.css') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('Image/plant.png') }}" />
+</head>
+<body>
+<div class="order-confirmation">
+    <h1 style="text-align: center">Commande validée</h1>
+    <h3>Commande n°{{ order.id }}</h3>
+
+    <p>Date de la commande : {{ order.date|date('d-m-Y') }}</p>
+    <p>Montant total : {{ order.totalPrice }}€</p>
+
+    <h3>Détails :</h3>
+    {% for item in order.orderItems %}
+        <h4>{{ item.product.name }}</h4>
+        <p>Quantité : {{ item.quantity }}</p>
+        <p>Prix unitaire : {{ item.product.price }}€</p>
+        {% if item.quantity > 1 %}
+        <p>Prix total : {{ item.quantity * item.product.price }}€</p>
+        {% endif %}
+        <hr>
+    {% endfor %}
+    <h4>Livraison</h4>
+    <p>5€</p>
+
+    <h2 style="text-align: right;"><a href="{{ path('app_home') }}" style="color: black;">Retourner à la page d'accueil</a></h2>
+</div>
+</body>
+</html>
+
+{#{% include 'footer.html.twig' %}#}

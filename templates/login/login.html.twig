@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+<title> Login </title>
+
+{% block header %}
+    {% include 'header/header.html.twig' %}
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('Image/plant.png') }}" />
+{% endblock %}
+
+{% block body %}
+
+    <link href="{{ asset('asset/login/style.css') }}" rel="stylesheet">
+
+    <section class="sectionConnexion">
+        <div class="connexion">
+            <p id="bienvenue">Bienvenue !</p>
+            <p id="connCrea">Connexion</p>
+            <form method="post">
+                <label id="connE" for="">Email</label> <br>
+                <input type="email" value="{{ last_email }}" name="email" id="inputEmail" class="inputT" autocomplete="email" required autofocus>
+
+
+                <label class="verif" id="verifEmail">Champs obligatoire <br></label>
+                <label class="verif" id="emailValide">Veuillez renseigner une adresse mail valide. <br></label>
+                <br><br>
+                <label id="connM" for="">Mot de passe</label> <br>
+                <input type="password" name="password" id="inputPassword" class="inputP" autocomplete="current-password" required>
+                <br>
+                {% if error %}
+                    <div style="color: #de481b">{{ error }}</div>
+                    <label class="verif" id="verifPassword">Champs obligatoire <br></label>
+                    <div class="eye">
+                        <img class="oeilError" src="{{ asset('Image/oeil.png') }}" alt="oeil ouvert">
+                        <img class="oeilBError" src="{{ asset('Image/oeil2.png') }}" alt="oeil barré">
+                    </div>
+                {% else %}
+                    <div class="eye">
+                        <img class="oeil" src="{{ asset('Image/oeil.png') }}" alt="oeil ouvert">
+                        <img class="oeilB" src="{{ asset('Image/oeil2.png') }}" alt="oeil barré">
+                    </div>
+                {% endif %}
+
+                <br> <br>
+                <div class="container">
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" >
+                    <button id="btnConn" type="submit"> Je me connecte </button>
+                    <div class="line"></div>
+                    <p id="connCrea">Vous n'avez pas de compte ?</p>
+                    <a id="btnCrea" href="{{ path('app_register') }}">Créer mon compte</a>
+                </div>
+            </form>
+
+        </div>
+    </section>
+
+    <script src="{{ asset('asset/register/register.js') }}"> </script>
+{% endblock %}
+
+{% block footer %}
+    {% include 'footer/footer.html.twig' %}
+{% endblock %}

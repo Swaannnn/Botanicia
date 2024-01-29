@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+
+<title> Register </title>
+
+{% block header %}
+    {% include 'header/header.html.twig' %}
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('Image/plant.png') }}" />
+{% endblock %}
+
+{% block body %}
+
+    <link rel="stylesheet" href="{{ asset('asset/register/style.css') }}">
+
+    <body>
+    <section class="sectionCreation">
+        <div class="creation">
+            <p id="bienvenue">Bienvenue !</p>
+            <p id="connCrea">Je crée mon compte</p>
+
+            {{ form_errors(registrationForm) }}
+            {{ form_start(registrationForm) }}
+            {{ form_row(registrationForm._token) }}
+
+            <label id="connE">Nom</label> <br>
+            {{ form_row(registrationForm.lastName) }}
+            <label class="verif prenomValide">Veuillez renseigner un prénom valide. <br></label>
+            <br>
+
+            <label id="connE">Prénom</label> <br>
+            {{ form_row(registrationForm.firstName) }}
+            <label class="verif nomValide">Veuillez renseigner un nom valide. <br></label>
+            <br>
+
+            <label id="connE">Email</label> <br>
+            {{ form_row(registrationForm.email) }}
+            <label class="verif emailValide">Veuillez renseigner une adresse mail valide. <br></label>
+            <br>
+
+            <label id="connM">Mot de passe</label> <br>
+            {{ form_row(registrationForm.plainPassword) }}
+            <div class="eye">
+                <img class="oeil" src="{{ asset('Image/oeil.png') }}" alt="oeil ouvert">
+                <img class="oeilB" src="{{ asset('Image/oeil2.png') }}" alt="oeil barré">
+            </div>
+            <br>
+
+            <label id="connM" for="">Mot de passe (confirmation)</label> <br>
+            <input class="inputP2" type="password"> <br>
+
+            <div class="eye2">
+                <img class="oeil2" src="{{ asset('Image/oeil.png') }}" alt="oeil ouvert">
+                <img class="oeilB2" src="{{ asset('Image/oeil2.png') }}" alt="oeil barré">
+            </div>
+            <label class="verif verifMotdepasse">Les mots de passes doivent être identiques <br></label>
+            <label class="verif verifMotdepasse2">Le mot de passe doit faire au moins 6 caractères <br></label>
+            <br>
+
+{#            <label>J'accepte les termes et conditions</label>#}
+            <div style="margin-bottom: 10px;">
+                {{ form_row(registrationForm.agreeTerms) }}
+
+            </div>
+
+            <button type="submit" class="btn" id="btnConn">Je crée mon compte</button>
+
+            {{ form_end(registrationForm) }}
+
+            <div class="container">
+                <div class="line"></div>
+                <p id="connCrea">Vous êtes déjà inscrit chez nous ?</p>
+                <a id="btnCrea" href="{{ path('app_login') }}">Se connecter</a>
+            </div>
+        </div>
+    </section>
+    <script src="{{ asset('asset/register/register.js') }}"> </script>
+    </body>
+
+{% endblock %}
+
+{% block footer %}
+    {% include 'footer/footer.html.twig' %}
+{% endblock %}
+

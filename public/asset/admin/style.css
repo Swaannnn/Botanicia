@@ -1,0 +1,133 @@
+/*
+*  {
+    !*margin: 0;*!
+    !*padding: 0;*!
+}
+
+header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.gestion {
+    display: flex;
+    gap: 20px;
+}
+
+.reste {
+    display: flex;
+    justify-content: end;
+    gap: 20px;
+}
+
+#myChart {
+    width: 70%;
+    margin: auto;
+    margin-top: 5%;
+}*/
+
+
+:root {
+    --couleur-principale: #4CAF50;
+    --couleur-secondaire: #8BC34A;
+    --couleur-fond: #F5F5F5;
+    --couleur-texte: #333;
+}
+
+body {
+    background-color: var(--couleur-fond);
+    color: var(--couleur-texte);
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background-color: var(--couleur-principale);
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.gestion a {
+    color: white;
+    text-decoration: none;
+    margin-right: 15px;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: var(--couleur-secondaire);
+}
+
+.reste a {
+    color: white;
+    text-decoration: none;
+    margin-right: 15px;
+    background-color: var(--couleur-secondaire);
+
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--couleur-principale);
+}
+
+th {
+    background-color: var(--couleur-principale);
+    color: white;
+}
+
+a {
+    color: var(--couleur-secondaire);
+    text-decoration: none;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: white;
+}
+
+a:hover {
+    background-color: var(--couleur-secondaire);
+    color: white;
+}
+
+
+
+
+form {
+    text-align: center;
+    margin: 50px auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    display: flex;
+}
+
+input[type="text"] {
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #92a96f; /* Vert olive */
+    border-radius: 5px;
+}
+
+button {
+    background-color: #7f8c6a; /* Vert mousse */
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 20px;
+}
+
+button:hover {
+    background-color: #779a34; /* Vert plus foncé au survol */
+}
+

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+
+<title>Botanicia - Commande</title>
+<link rel="stylesheet" href="{{ asset('asset/order/style.css') }}">
+<link rel="icon" type="image/png" sizes="16x16" href="{{ asset('Image/plant.png') }}" />
+
+{% include 'header/header.html.twig' %}
+
+{% block body %}
+    <form action="{{ path('app_order_trait') }}" method="post">
+        <section>
+            <div class="left">
+                <div class="formAdress">
+                    <h2>Adresse de livraison</h2>
+                    <div class="same">
+                        <div class="labelInput">
+                            <label class="labelAddress">Nom</label>
+                            <input class="inputAddress adress1" type="text" name="lastName" value="{{ app.user.address.lastName is defined ? app.user.address.lastName : app.user.lastName }}"> <br>
+                        </div>
+
+                        <div class="labelInput">
+                            <label class="labelAddress">Prénom</label>
+                            <input class="inputAddress adress2" type="text" name="firstName" value="{{ app.user.address.firstName is defined ? app.user.address.firstName : app.user.firstName }}"> <br>
+                        </div>
+
+                        <div class="labelInput">
+                            <label class="labelAddress">Numéro de téléphone</label>
+                            <input class="inputAddress adress3" type="text" name="phoneNumber" value="{{ app.user.address.phoneNumber is defined ? app.user.address.phoneNumber : app.user.phoneNumber is defined ? app.user.phoneNumber : ''  }}" maxlength="10"> <br> <br>
+                        </div>
+                    </div>
+
+                    <div class="same">
+                        <div class="labelInput">
+                            <label class="labelAddress">Adresse</label>
+                            <input class="inputAddress3 adress4" type="text" name="street" value="{{ app.user.address.street is defined ? app.user.address.street : ''  }}"> <br>
+                        </div>
+
+                        <div class="labelInput">
+                            <label class="labelAddress">Code postal</label>
+                            <input class="inputAddress2 adress5" type="text" name="postalCode" value="{{ app.user.address.postalCode is defined ? app.user.address.postalCode : ''  }}" maxlength="5"> <br>
+                        </div>
+
+                        <div class="labelInput">
+                            <label class="labelAddress">Ville</label>
+                            <input class="inputAddress2 adress6" type="text" name="city" value="{{ app.user.address.city is defined ? app.user.address.city : ''  }}"> <br>
+                        </div>
+
+                        <div class="labelInput">
+                            <label class="labelAddress">Pays</label>
+                            <input class="inputAddress2 adress7" type="text" name="country" value="{{ app.user.address.country is defined ? app.user.address.country : ''  }}"> <br>
+                        </div>
+                    </div>
+                    <br>
+                    <p class="errorAdresse">Veuillez renseigner une adresse</p>
+                </div>
+
+
+                <div class="choixPaiement">
+                    <h2>Méthode de paiement</h2>
+                    <div class="cb">
+                        <input type="radio" name="methodePaiement" value="CB" id="radioCB" checked>
+                        <label id="labelCarte" onclick="toggleRadioCB()">Carte bleue</label>
+                    </div>
+                    <div class="paypal">
+                        <input type="radio" name="methodePaiement" value="PayPal" id="radioPayPal">
+                        <label id="labelPayPal" onclick="toggleRadioPayPal()">PayPal</label>
+                    </div>
+                </div>
+
+                <div class="forms">
+
+                    <div class="formCarte">
+                        <div class="">
+                            <label for=""><b>Nom du Titulaire de la carte</b></label><br>
+                            <input type="text" placeholder="Henri Dupont" name="name" class="inputCb" id="inputName">
+                            <p class="verif nameIncorrect">Veuillez rentrer un nom</p>
+                        </div>
+                        <div class="">
+                            <label for=""><b>Numéro de la carte</b></label><br>
+                            <input type="text" name="cardNumber" class="inputCb" id="inputNum" maxlength="19" oninput="formatCarte(event)" placeholder="1234 5678 1234 5678">
+                            <p class="verif carteIncorrecte">Numéro de carte incorrect</p>
+                        </div>
+                        <div class="expCVV">
+                            <div class="exp">
+                                <label class="space"><b>Date d'expiration</b></label>
+                                <input type="text" name="date" class="inputCb" id="inputExp" maxlength="5" oninput="formatDate(event)" placeholder="MM/AA">
+                                <p class="verif dateIncorrecte">Date d'expiration incorrecte</p>
+                            </div>
+                            <div class="CVV">
+                                <label class="space"><b>CVV</b></label>
+                                <input type="text" name="cvv" placeholder="000" maxlength="3" class="inputCb" id="inputCVV">
+                                <p class="verif CVVIncorrect">CVV incorrect</p>
+                            </div>
+                        </div>
+                        <button class="valider">Payer</button>
+                    </div>
+
+
+                    <div class="formPaypal">
+                        <div class="">
+                            <label><b>Adresse email</b></label>
+                            <input type="text" name="email" value="{{ app.user.email }}" placeholder="exemple@botanicia.fr" class="inputPaypal emailPaypal">
+                            <p class="verif emailIncorrect">Veuillez renseigner une email valide</p>
+                        </div>
+                        <div class="">
+                            <label><b>Mot de passe</b></label>
+                            <input type="password" name="password" class="inputPaypal passwordPaypal">
+                            <p class="verif passwordIncorrect">Veuillez rentrer un mot de passe</p>
+                        </div>
+                        <button class="validerP">Payer</button>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="right">
+                <div class="recap">
+                    <div class="promo">
+                        <input id="code" type="text" placeholder="Code promo">
+                        <button id="appliquer">Appliquer</button>
+                    </div>
+                    <table class="price">
+                        <tbody>
+                        <tr>
+                            <td class="s">Sous total</td>
+                            <td class="r s">{{app.user.shoppingCart.totalPrice}} €</td>
+                        </tr>
+                        <tr>
+                            <td>Livraison</td>
+                            <td class="r">5.00€</td>
+                        </tr>
+                        <tr>
+                            <td>Réduction</td>
+                            <td class="r">0.00€</td>
+                        </tr>
+                        <br><img src="{{ asset('Image/line.png') }}" alt="line" class="line"><br>
+                        <tr>
+                            <td class="t">Total</td>
+                            <td class="r t">{{app.user.shoppingCart.totalPrice + 5}} €</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card">
+                    <img id="puce" src="{{ asset('Image/puce.png') }}"/>
+                    <img id="visa"src="{{ asset('Image/visa.png') }}"/>
+                    <div class="card_crypto">
+                        <p class="label_crypto">Cryptogramme :</p>
+                        <p class="value_crypto">000</p>
+                    </div>
+                    <p class="card_number">1234 5678 1234 5678</p>
+                    <div class="arrow"></div>
+                    <p class="card_name">HENRI DUPONT</p>
+                    <p class="card_expire">Expire en : MM/AA</p>
+                </div>
+            </div>
+        </section>
+    </form>
+
+    <script src="{{ asset('asset/order/script.js') }}"></script>
+{% endblock %}

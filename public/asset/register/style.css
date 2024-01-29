@@ -1,0 +1,225 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    font-family: 'nunito', sans-serif;
+}
+
+section {
+    background-image: url("../../Image/wallpaper.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sectionCreation {
+    min-height: calc(100vh - 110px);
+}
+
+.spacing {
+    height: 2vh;
+}
+
+.connexion {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 6px 6px 10px 4px rgba(0,0,0,0.39);
+    margin: 4% 0;
+}
+
+.creation {
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 6px 6px 10px 4px rgba(0,0,0,0.39);
+    margin: 4% 0;
+}
+
+#bienvenue {
+    text-align: center;
+    font-size: 25px;
+    transform: translateY(-10px);
+}
+
+#connCrea {
+    font-size: 20px;
+}
+
+#connE {
+    font-size: 15px;
+}
+
+#connM {
+    font-size: 15px;
+}
+
+.inputT {
+    width: 400px;
+    font-size: 15px;
+
+    outline: none;
+    border: 1px #b2b2b2 solid;
+    border-radius: 3px;
+    color: rgb(110, 110, 110);
+    padding: 5px;
+}
+
+.inputT:hover {
+    border: 1px black solid;
+}
+
+.inputT:focus {
+    border: 1px black solid;
+}
+
+.verif {
+    display: none;
+    position: absolute;
+    font-size: 13px;
+    color: #ff725d;
+}
+
+.inputP {
+    width: 400px;
+    font-size: 15px;
+
+    outline: none;
+    border: 1px #b2b2b2 solid;
+    border-radius: 3px;
+    color: rgb(110, 110, 110);
+    padding: 5px;
+}
+
+.inputP:hover {
+    border: 1px black solid;
+}
+
+.inputP:focus {
+    border: 1px black solid;
+}
+
+.inputP2 {
+    width: 400px;
+    font-size: 15px;
+
+    outline: none;
+    border: 1px #b2b2b2 solid;
+    border-radius: 3px;
+    color: rgb(110, 110, 110);
+    padding: 5px;
+}
+
+.inputP2:hover {
+    border: 1px black solid;
+}
+
+.inputP2:focus {
+    border: 1px black solid;
+}
+
+.eye {
+    cursor: pointer;
+}
+
+.eye2 {
+    cursor: pointer;
+}
+
+.oeil {
+    position: absolute;
+    display: none;
+    width: 20px;
+    height: auto;
+    transform: translateX(375px) translateY(-26px);
+}
+
+.oeilB {
+    position: absolute;
+    width: 20px;
+    height: auto;
+    transform: translateX(375px) translateY(-26px);
+}
+
+.oeil2 {
+    position: absolute;
+    display: none;
+    width: 20px;
+    height: auto;
+    transform: translateX(375px) translateY(-26px);
+}
+
+.oeilB2 {
+    position: absolute;
+    width: 20px;
+    height: auto;
+    transform: translateX(375px) translateY(-26px);
+}
+
+#mdpOublie {
+    text-align: end;
+    font-size: 12px;
+}
+
+#mdpOublie a {
+    color: rgb(57, 57, 57);
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    /* gap: 10px; */
+}
+
+#connCrea {
+    margin-bottom: 20px;
+}
+
+/* #8dc73f */
+#btnConn {
+    width: 412px;
+    border: solid 1px #0b9446;
+    border-radius: 3px;
+    background-color: #0b9446;
+    color: white;
+    padding: 3px 10px;
+    /*transition: 0.8s;*/
+    text-align: center;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#btnConn:hover {
+    border: solid 1px #0b9446;
+    background-color: white;
+    color: #0b9446;
+    /*transition: 0.8s;*/
+}
+
+.line {
+    border-top: 1px solid rgb(168, 168, 168);
+    width: 412px;
+    margin: 30px 0 20px 0;
+}
+
+#btnCrea {
+    border: solid 1px #0b9446;
+    border-radius: 3px;
+    background-color: white;
+    color: #0b9446;
+    padding: 3px 10px;
+    /*transition: 0.6s;*/
+    text-align: center;
+}
+
+#btnCrea:hover {
+    border: solid 1px #0b9446;
+    background-color: #0b9446;
+    color: white;
+    /*transition: 0.6s;*/
+}

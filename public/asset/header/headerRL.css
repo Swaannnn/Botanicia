@@ -1,0 +1,21 @@
+header {
+    height: 60px;
+    background-color: #0b9446;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr 17px;
+    color: white;
+}
+
+.bota {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bota p {
+    color: black;
+}
+
+#logo {
+    height: 50px;
+}

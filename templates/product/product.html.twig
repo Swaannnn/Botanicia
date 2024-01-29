@@ -1,0 +1,97 @@
+{% include 'header/header.html.twig' %}
+
+<title> Botanicia - {{ product.getName }} </title>
+<link rel="stylesheet" href="{{ asset('asset/product/product.css') }}">
+<link rel="icon" type="image/png" sizes="16x16" href="{{ asset('Image/plant.png') }}" />
+
+{% block body %}
+
+    <div class="contenu">
+        <div class="conteneur">
+            <div class="article">
+                <img src="/{{ product.getPhoto }}" alt="Image du produit" class="imgart">
+
+                <div class="infos">
+                    <div class="marque">{{ product.getBrand }}</div>
+                    <div class="nomarticle">
+                        {{ product.getName }}
+                    </div>
+                    <div class="descarticle">
+                        <p class="desctitre">Description</p>
+                        <p class="desc">
+                            {{ product.getDescription}}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="contenuart">
+                    {% if app.user %}
+                    <form action="{{ path('app_shopping_cart_add', {'id': product.getId}) }}" method="post" class="panierbox">
+                    {% else %}
+                    <form action="{{ path('app_login') }}" method="post" class="panierbox">
+                    {% endif %}
+                        <div class="pan">
+                            <div class="prixquantité">
+                                <div>
+                                    <p class="prix">{{ product.getPrice }}€</p>
+                                </div>
+                                <div class="quantite">
+                                    {% if product.getQuantity > 0 %}
+                                        <label for="quantite">Quantité: </label>
+                                        <select name="quantity" id="quantite">
+                                            {% for i in range(1, 10) %}
+                                                {% if i <= product.getQuantity %}
+                                                    <option value="{{ i }}">{{ i }}</option>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </select>
+                                    {% endif %}
+                                </div>
+
+                            </div>
+
+                            {% if product.getQuantity <= 10 and product.getQuantity > 1 %}
+                                <p class="under10">Attention, il ne reste que {{ product.getQuantity }} exemplaires en stock !</p>
+                            {% elseif product.getQuantity == 1 %}
+                                <p class="under10 ">Attention, il ne reste que 1 exemplaire en stock !</p>
+                            {% elseif product.getQuantity == 0 %}
+                                <p class="just0">Plus de stock</p>
+                            {% endif %}
+                            {% if product.getQuantity > 0 %}
+                                <input type="submit" value="Ajouter dans le panier" class="buttonpanier">
+                            {% endif %}
+                        </div>
+                    </form>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <div class="autre">
+            <h2 style="margin-bottom: 20px; transform: translateX(20vh)">Autres produits de la même catégorie :</h2>
+
+            <button id="autresProduits" style="transform: translateX(-20vh); margin-bottom: 20px">Afficher plus</button>
+        </div>
+        <section class="products">
+            {% for product in products %}
+                <a class="product" href="{{ path('app_product', {'id': product.getId}) }}">
+                    <div class="image">
+                        <img src="/{{ product.getPhoto }}" alt="Image du produit">
+                    </div>
+                    <div class="description">
+                        <p>{{ product.getBrand }}</p>
+                        <p>{{ product.getName }}</p>
+                        <p>{{ product.getPrice }}€</p>
+                    </div>
+                </a>
+            {% endfor %}
+        </section>
+    </div>
+
+    <script src="{{ asset('asset/product/product.js') }}"></script>
+
+{% endblock %}
+
+{% include 'footer/footer.html.twig' %}

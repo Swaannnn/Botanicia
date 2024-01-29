@@ -1,0 +1,52 @@
+{% include 'header/header.html.twig' %}
+
+<head>
+    <link rel="stylesheet" href="{{ asset("asset/search/style.css") }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('Image/plant.png') }}" />
+</head>
+
+{% block body %}
+
+    <section>
+    {% if articles is not empty %}
+
+        <h3 class="title">résultats pour "{{ search }}" :</h3>
+
+            {% for product in articles %}
+                <div class="produit">
+                    <div class="image">
+                        <a href="{{ path('app_product', {'id': product.getId}) }}">
+                            <img id="imgProduit" src="{{ product.getPhoto }}" alt="Image du produit">
+                        </a>
+                    </div>
+                    <div class="infos">
+                        <div class="nameBrand">
+                            <p class="name">
+                                <a href="{{ path('app_product', {'id': product.getId}) }}">
+                                    {{ product.getName }}
+                                </a>
+                            </p>
+                            <p class="brand">{{ product.getBrand }}</p>
+                        </div>
+                    </div>
+                    <div class="priceSection">
+                        <p class="price">{{ product.getPrice }}€</p>
+                    </div>
+                    <div class="forButton">
+                        <div class="voirProduitt">
+                            <a class="voirProduit" href="{{ path('app_product', {'id': product.getId}) }}">voir le produit</a>
+                        </div>
+                    </div>
+                </div>
+        {% endfor %}
+    {% else %}
+        <div class="noResult">
+            <h4 class="noResultTitle">{{ search }} ne correspond à aucun résultat.</h4>
+            <img class="noResultImage" src="{{ asset('Image/sadplant.png') }}" alt="sadPlant">
+        </div>
+    {% endif %}
+    </section>
+
+    {% include 'footer/footer.html.twig' %}
+{% endblock %}
+

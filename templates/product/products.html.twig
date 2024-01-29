@@ -1,0 +1,41 @@
+{% extends 'header/header.html.twig' %}
+
+{% block body %}
+
+    <title> Botanicia -  {{ products[0].getCategory.getName }}</title>
+    <link rel="stylesheet" href="{{ asset('asset/product/products.css') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('Image/plant.png') }}" />
+
+    <section class="screen">
+        <div class="listproducts">
+            <p class="titlelist">{{ products[0].getCategory.getName }}</p>
+            <div class="products">
+                {% for product in products %}
+                    <a class="product" href="{{ path('app_product', {'id': product.getId}) }}">
+                        <div class="image">
+                            <img src="/{{ product.getPhoto }}" alt="Image du produit">
+                        </div>
+                        <div class="description">
+                            <p>{{ product.getBrand }}</p>
+                            <p>{{ product.getName }}</p>
+                            {% set prix = product.getPrice|split('.') %}
+                            <div class="price">
+                                {% if product.getQuantity == 0 %}
+                                    <p>En rupture</p>
+                                {% else %}
+                                    <p>{{ prix[0] }}€</p>
+                                    {% if prix|length != 1 %}
+                                        <p>{{ prix[1] }}</p>
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    {% include 'footer/footer.html.twig' %}
+{% endblock %}
+

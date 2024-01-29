@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        {% block header %}
+            <link rel="stylesheet" href="{{ asset('asset/header/style.css') }}"/>
+            <header>
+                <div class="headertitle">
+                    <a href="{{ path('app_home') }}" class="headerA">
+                        <img src="{{ asset('Image/plant.png') }}" alt="Botanicia" id="logo">
+                        <p class="titleHeader">BOTANICIA</p>
+                    </a>
+                </div>
+                <ul>
+                    <li><a href="{{ path('app_products', {'name': 'Plante'}) }}">Plante</a></li>
+                    <li><a href="{{ path('app_products', {'name': 'Arbre'}) }}">Arbre</a></li>
+                    <li><a href="{{ path('app_products', {'name': 'Outil & Equipement'}) }}">Outil & Equipement</a></li>
+                    <li><a href="{{ path('app_products', {'name': 'Machine'}) }}">Machine</a></li>
+                </ul>
+                <div class="perso">
+                    <div id="recherche">
+                        <form action="{{ path('app_search') }}" method="GET">
+                            <input type="search" name="produit" placeholder="Rechercher..." >
+                            <button id="cache" type="submit">
+                                <img src="{{ asset('Image/recherche-a-la-loupe.png') }}" alt="Loupe" id="loupe">
+                            </button>
+                        </form>
+                    </div>
+                    {%  if app.user and is_granted('ROLE_ADMIN') %}
+                    <a id="personne" href="{{ path('app_admin_users') }}">
+                        <img src="{{ asset('Image/tableau-de-bord.png') }}" alt="iconee-personne" id="icone-personne-img">
+                        <div>Tableau de bord</div>
+                    </a>
+                    {% elseif app.user and is_granted('ROLE_USER') %}
+                        <a id="panier" href="{{ path('app_shopping_cart') }}">
+                            <img src="{{ asset('Image/panier.png') }}" alt="Panier" id="panier-img">
+                            <p>Panier</p>
+                        </a>
+                        {% set currentPath = app.request.pathinfo %}
+                        {% if currentPath == '/account' %}
+                            <a id="logout" href="{{ path('app_logout') }}">
+                                <img src="{{ asset('Image/logout.png') }}" alt="iconee-logout" id="icone-logout-img">
+                                <div>Se déconnecter</div>
+                            </a>
+                        {% else %}
+                            <a id="personne" href="{{ path('app_account') }}">
+                                <img src="{{ asset('Image/icone-personne.png') }}" alt="iconee-personne" id="icone-personne-img">
+                                <div>Mon compte</div>
+                            </a>
+                        {% endif %}
+
+                    {% else %}
+                    <a id="personne" href="{{ path('app_login') }}">
+                        <img src="{{ asset('Image/icone-personne.png') }}" alt="iconee-personne" id="icone-personne-img">
+                        <div>Se connecter</div>
+                    </a>
+                    {% endif %}
+                </div>
+
+                <img src="{{ asset('Image/menu.png') }}" alt="Barre de menu" id="barre">
+            </header>
+        {% endblock %}
+
+        {% block body %}
+        {% endblock %}
+    </body>
+</html>

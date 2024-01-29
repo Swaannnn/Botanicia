@@ -1,0 +1,116 @@
+* {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+section {
+    background-color: #f2f2f2;
+    padding-bottom: 30px;
+    min-height: calc(100vh - 140px);
+}
+
+.title {
+    margin: 20px;
+    transform: translateX(calc(100vh - 650px));
+}
+
+.noResult {
+    gap: 10vh;
+}
+
+.noResultTitle {
+    font-size: 30px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.noResultImage {
+    width: 700px;
+    margin-top: 50px;
+    transform: translateX(calc(50vw - 350px));
+}
+
+.produit {
+    width: 1300px;
+    transform: translateX(calc(100vh - 650px));
+
+    display: grid;
+    grid-template-columns: 2fr 3fr 1fr 1fr;
+
+    border-bottom: solid 1px gray;
+    border-right: solid 1px gray;
+    border-left: solid 1px gray;
+
+    background-color: white;
+}
+
+.produit:first-of-type {
+    border-top: solid 1px gray;
+}
+
+.image {
+    text-align: center;
+}
+
+#imgProduit {
+    height: 100px;
+}
+
+.infos {
+    display: flex;
+    align-items: center;
+}
+
+.nameBrand {
+    display: flex;
+    flex-direction: column;
+}
+
+.name {
+    font-size: 22px;
+    display: flex;
+    flex-direction: column;
+}
+
+.name a {
+    color: black;
+}
+
+.name a:hover {
+    text-decoration: underline black;
+}
+
+.brand {
+    color: grey
+}
+
+.priceSection {
+    display: flex;
+    align-items: center;
+}
+
+.forButton {
+    display: flex;
+    align-items: center;
+}
+
+.voirProduitt {
+    background-color: #0b9446;
+    border: solid 1px black;
+    border-radius: 8px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+}
+
+.voirProduit {
+    margin: 5px 10px;
+    color: white;
+}
+
+.voirProduitt:hover {
+    background-color: rgb(5, 99, 5);
+    border: solid black 1px;
+    color: white;
+}

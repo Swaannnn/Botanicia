@@ -1,0 +1,33 @@
+controllers:
+    resource:
+        path: ../src/Controller/
+        namespace: App\Controller
+    type: attribute
+# config/routes.yaml
+
+app_admin_edit_user:
+    path: '/admin/users/edit/{id}'
+    controller: 'App\Controller\AdminController::editUser'
+    requirements:
+        id: '\d+'  # Assurez-vous que l'id est un nombre
+    methods: ['GET', 'POST']
+
+# config/routes.yaml
+# config/routes.yaml
+
+app_search:
+    path: /search
+    controller: App\Controller\SearchController::index2
+    methods: ['GET']
+
+
+# config/routes.yaml
+app_chart:
+    path: /chart
+    controller: App\Controller\ChartController::index
+
+not_found:
+    path: /{url}
+    controller: 'App\Controller\ErrorController::show404'
+    requirements:
+        url: .*

@@ -1,0 +1,85 @@
+{% include 'header/header.html.twig' %}
+
+<title>Panier</title>
+<link rel="stylesheet" href="{{ asset('asset/shopping_cart/style.css') }}">
+<link rel="icon" type="image/png" sizes="16x16" href="{{ asset('Image/plant.png') }}" />
+
+{% block body %}
+    <body>
+    <section>
+        <div class="left">
+            <div class="panier">
+                <p class="title">Votre panier&nbsp;</p>
+                <p>({{ nbProducts}} produit)</p>
+            </div>
+
+{#            <h1>Mon Panier</h1>#}
+            {% for item in items %}
+                <div class="article">
+                    <div class="articleImage">
+                        <a href="{{ path('app_product', {'id': item.getProduct.getId}) }}">
+                            <img src="/{{ item.getProduct.getPhoto }}" alt="{{ item.getProduct.getName }}" class="img">
+                        </a>
+                    </div>
+                    <div class="articleDescription">
+                        <a href="{{ path('app_product', {'id': item.getProduct.getId}) }}">
+                            <h2>{{ item.getProduct.getName }}</h2> {#ou <p>#}
+                        </a>
+                        {% if item.product.getQuantity == 0 %}
+                            <p class="plusStock">Rupture !</p>
+                        {% elseif item.product.getQuantity < 10 %}
+                            <p class="encoreStock">Plus que {{ item.product.getQuantity }} en stock !</p>
+                        {% else %}
+                            <p class="stock">En stock</p>
+                        {% endif %}
+                    </div>
+                    <div class="articlePrice">
+                        <p class="price_article">{{ item.getProduct.getPrice }} €</p>
+                        <div class="quantity">
+                            <p> Quantité </p>
+                            <a href="{{ path('app_shopping_cart_decrement', {'id': item.getProduct.getId}) }}" style="color: black">&nbsp; - &nbsp;</a>
+                            <p>{{ item.getQuantity }} </p>
+                            {% if item.product.getQuantity > item.getQuantity %}
+                                <a href="{{ path('app_shopping_cart_increment', {'id': item.getProduct.getId}) }}" style="color: black">&nbsp; +</a>
+                            {% else %}
+                                <p class="hid">  ++</p>
+                            {% endif %}
+                        </div>
+                        <a class="supp" href="{{ path('app_shopping_cart_remove', {'id': item.getProduct.getId}) }}">Supprimer</a>
+                    </div>
+                </div>
+            {% endfor %}
+
+
+        </div>
+        <div class="right">
+            <p class="title">Récapitulatif</p>
+            <div class="recap">
+                <table class="price">
+                    <tbody>
+                    {% for item in items %}
+                    <tr>
+                        <td>{{ item.getProduct.getName }} (x{{ item.getQuantity }})</td>
+                        {% set price = item.getProduct.getPrice * item.getQuantity %}
+                        <td class="r">{{ price }}€</td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <td class="t">Total</td>
+                        <td class="r t">{{ total }} €</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <br>
+                {% if items|length != 0 %}
+                <a href="{{ path('app_order') }}" class="valider">Valider et payer</a>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+    </body>
+    </html>
+
+{% endblock %}
+
+{{ include('footer/footer.html.twig') }}
